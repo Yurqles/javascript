@@ -52,44 +52,64 @@ cnv.height = 820;
 
 //Global Variables
 let player = {
-    x: 10,
-    dx: 4, 
+    x: 10, 
     y: 645,
-    dy: 4,
     w: 50,
     h: 75,
+    speed : 6,
     xSpeed: 0,
     ySpeed: 0,
-    speed : 4,
-    gravity: 0.2,
-}
+};
+
 
 let arrowRightPressed = false;
 let arrowLeftPressed = false;
 let arrowUpPressed = false;
-let arrowDownPressed = false;
+
 
 
 requestAnimationFrame(draw)
 
 function draw(){ 
+
     //Logic
     if (arrowRightPressed){
         player.x += player.speed;
     } else if (arrowLeftPressed) {
-        player.x += -player.speed
+        player.x += player.speed;
     } else if (arrowUpPressed) {
-        player.y += -player.speed
-    } else if (arrowDownPressed) {
-        player.y += player.speed
+        player.y += -player.speed;
     }
+
+    //Gravity and Friction
+    player.ySpeed += 0.1;//gravity
+    player.x += player.xSpeed;
+    player.y += player.ySpeed;
+    player.xSpeed *= 0.9;//friction
+    player.ySpeed *= 0.9;//friction
+
+    // Make the grass repel gravity
+    
+    if (player.y > 643) {
+        player.y = 643;
+        player.y += -0.1;
+    }
+
+    // So my player doesn't leave page
+    if (player.x < 0) {
+        player.x = 1199;
+    } else if (player.x > 1199) {// if player goes past right boundary
+        player.x = 0;
+    }
+
+
 
     //Clearing the page
     ctx.clearRect(0, 0, cnv.width, cnv.height);
 
     //Background
     let background = document.getElementById('background');
-    ctx.drawImage(background, 0, 0, 1400, 1000)
+    ctx.drawImage(background, 0, 0, 1400, 1000);
     
     //Ground
     ctx.fillStyle = '#684027';
@@ -99,7 +119,7 @@ function draw(){
     ctx.fillStyle = "green";
     ctx.fillRect(0, 720, 1250, 20);
 
-    //Moving player by xspeed and yspeed
+    //Moving player by xSpeed and ySpeed
     player.x += player.xSpeed;
     player.y += player.ySpeed;
 
@@ -115,25 +135,23 @@ document.addEventListener("keydown", keydownHandler);
 document.addEventListener("keyup", keyupHandler);
 
 function keydownHandler(){
-     if (event.code == "ArrowRight" || event.code == "KeyD"){
-        player.xSpeed = player.speed;
-     } else if (event.code == "ArrowLeft" || event.code == "KeyA"){
-        player.xSpeed = -player.speed;
-    }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space"){
-        player.ySpeed = -player.speed
-    }  else if (event.code == "ArrowDown" || event.code == "KeyS"){
-        player.ySpeed = player.speed
+        if (event.code == "ArrowRight" || event.code == "KeyD"){
+            player.xSpeed += player.speed;
+        } else if (event.code == "ArrowLeft" || event.code == "KeyA"){
+            player.xSpeed += -player.speed;
+        }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space"){
+            player.ySpeed += -player.speed;
+        }
     }
-}
+
 
 function keyupHandler(){
     if (event.code == "ArrowRight" || event.code == "KeyD" && player.xSpeed > 0){
        player.xSpeed = 0;
     } else if (event.code == "ArrowLeft" || event.code == "KeyA" && player.xSpeed < 0){
        player.xSpeed = 0;
-   }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space"){
-       player.ySpeed = 0;
-   }  else if (event.code == "ArrowDown" || event.code == "KeyS"){
+   }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space" && player.ySpeed < 0){
        player.ySpeed = 0;
    }
 }
+
