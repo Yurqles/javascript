@@ -56,9 +56,14 @@ let player = {
     y: 645,
     w: 50,
     h: 75,
-    speed : 6,
-    xSpeed: 0,
-    ySpeed: 0,
+    speed_x: 10,// move xSpeed
+    speed_y : 25,//move ySpeed 
+    xSpeed: 0,//move x
+    ySpeed: 0,//move y
+    jumping: false, //tell gravity to start
+    right: false, //stop repeated movement
+    left: false, //stop repeated movement
+    
 };
 
 
@@ -70,29 +75,23 @@ let arrowUpPressed = false;
 
 requestAnimationFrame(draw)
 
-function draw(){ 
+function draw() { 
 
     //Logic
-    if (arrowRightPressed){
-        player.x += player.speed;
-    } else if (arrowLeftPressed) {
-        player.x += player.speed;
-    } else if (arrowUpPressed) {
-        player.y += -player.speed;
+    if (arrowRightPressed && player.right == false){
+        player.x += player.speed_x;
+        player.right = true;
+    } else if (arrowLeftPressed && player.left == false) {
+        player.x += player.speed_x;
+        player.left = true;
+    } else if (arrowUpPressed && player.jumping == false) {
+        player.y += -player.speed_y;
+        player.jumping = true;
     }
 
-    //Gravity and Friction
-    player.ySpeed += 0.1;//gravity
-    player.x += player.xSpeed;
-    player.y += player.ySpeed;
-    player.xSpeed *= 0.9;//friction
-    player.ySpeed *= 0.9;//friction
-
-    // Make the grass repel gravity
-    
-    if (player.y > 643) {
-        player.y = 643;
-        player.y += -0.1;
+    //Landing
+    if (player.y > 644) {
+        player.y += -18;
     }
 
     // So my player doesn't leave page
@@ -102,7 +101,10 @@ function draw(){
         player.x = 0;
     }
 
-
+    //Gravity
+    if (player.y < 644){
+    player.y += 18;
+    }
 
     //Clearing the page
     ctx.clearRect(0, 0, cnv.width, cnv.height);
@@ -136,11 +138,11 @@ document.addEventListener("keyup", keyupHandler);
 
 function keydownHandler(){
         if (event.code == "ArrowRight" || event.code == "KeyD"){
-            player.xSpeed += player.speed;
+            player.xSpeed += player.speed_x;
         } else if (event.code == "ArrowLeft" || event.code == "KeyA"){
-            player.xSpeed += -player.speed;
+            player.xSpeed += -player.speed_x;
         }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space"){
-            player.ySpeed += -player.speed;
+            player.ySpeed += -player.speed_y;
         }
     }
 
