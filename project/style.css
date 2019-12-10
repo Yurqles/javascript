@@ -1,0 +1,12 @@
+body{
+    text-align: center;
+    background-color: rgb(49, 19, 19);
+}
+canvas{
+    margin: 3.5%;
+    border:5px solid gray;
+}
+
+p.a:hover{
+    color: orange;
+}
