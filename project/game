@@ -1,4 +1,4 @@
-HTML
+//HTML
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,154 +6,33 @@ HTML
 </head>
 <body>
     <canvas id="myCanvas"></canvas>
-        <img id="player1" src="media/Player 1.png" style="display: none">
-        <img id="player1" src="media/Player2.png" style="display: none">
-        <img id="cloud" src="media/cloud.png" style="display: none">
-        <img id="sun" src="media/sun.png" style="display: none">
-        <img id="background" src="media/background.jpg" style="display: none">
 
+        <img id="background1" src="media/background/parallax-demon-woods-bg.png" style="display: none">
+        <img id="background2" src="media/background/parallax-demon-woods-close-trees.png" style="display: none">
+        <img id="background3" src="media/background/parallax-demon-woods-far-trees.png" style="display: none">
+        <img id="background4" src="media/background/parallax-demon-woods-mid-trees.png" style="display: none">
+        <img id="sprite-sheet" src="media/character sprites/knight iso char.png" style="display: none">
+        <img id="enemy1" src="media/enemies/Bat_Sprite_Sheet.png" style="display: none">
+        <img id="background5" src="media/backdrop2/Layer_0010_1.png" style="display: none">
+        <img id="background6" src="media/backdrop2/Layer_0009_2.png" style="display: none">
+        <img id="background7" src="media/backdrop2/Layer_0008_3.png" style="display: none">
+        <img id="background8" src="media/backdrop2/Layer_0007_Lights.png" style="display: none">
+        <img id="background9" src="media/backdrop2/Layer_0006_4.png" style="display: none">
+        <img id="background10" src="media/backdrop2/Layer_0005_5.png" style="display: none">
+        <img id="background11" src="media/backdrop2/Layer_0004_Lights.png" style="display: none">
+        <img id="background12" src="media/backdrop2/Layer_0003_6.png" style="display: none">
+        <img id="background13" src="media/backdrop2/Layer_0002_7.png" style="display: none">
+        <img id="background14" src="media/backdrop2/Layer_0001_8.png" style="display: none">
+        <img id="background15" src="media/backdrop2/Layer_0000_9.png" style="display: none">
+        <img id="" src="" style="display: none">
+        <img id="" src="" style="display: none">
+        <img id="" src="" style="display: none">
+        <img id="" src="" style="display: none">
 
+        
 
+        <p class="a">Made By: Abdi</p>
 
-
-
-    <script src="main.js"></script>
-</body>
+        <script src="main.js"></script>
+    </body>
 </html>
-
-
-
-
-
-
-
-
-CSS
-body{
-    text-align: center;
-}
-canvas{
-    border:15px solid gray;
-}
-
-
-
-
-
-
-
-
-Javascript
-//Setup Canvas and Graphics Context
-let cnv = document.getElementById("myCanvas");
-let ctx = cnv.getContext("2d"); 
-cnv.width = 1200;
-cnv.height = 820;
-
-//Global Variables
-let player = {
-    x: 10, 
-    y: 645,
-    w: 50,
-    h: 75,
-    speed_x: 10,// move xSpeed
-    speed_y : 25,//move ySpeed 
-    xSpeed: 0,//move x
-    ySpeed: 0,//move y
-    jumping: false, //tell gravity to start
-    right: false, //stop repeated movement
-    left: false, //stop repeated movement
-    
-};
-
-
-let arrowRightPressed = false;
-let arrowLeftPressed = false;
-let arrowUpPressed = false;
-
-
-
-requestAnimationFrame(draw)
-
-function draw() { 
-
-    //Logic
-    if (arrowRightPressed && player.right == false){
-        player.x += player.speed_x;
-        player.right = true;
-    } else if (arrowLeftPressed && player.left == false) {
-        player.x += player.speed_x;
-        player.left = true;
-    } else if (arrowUpPressed && player.jumping == false) {
-        player.y += -player.speed_y;
-        player.jumping = true;
-    }
-
-    //Landing
-    if (player.y > 644) {
-        player.y += -18;
-    }
-
-    // So my player doesn't leave page
-    if (player.x < 0) {
-        player.x = 1199;
-    } else if (player.x > 1199) {// if player goes past right boundary
-        player.x = 0;
-    }
-
-    //Gravity
-    if (player.y < 644){
-    player.y += 18;
-    }
-
-    //Clearing the page
-    ctx.clearRect(0, 0, cnv.width, cnv.height);
-
-    //Background
-    let background = document.getElementById('background');
-    ctx.drawImage(background, 0, 0, 1400, 1000);
-    
-    //Ground
-    ctx.fillStyle = '#684027';
-    ctx.fillRect(0, 726, 1250, 100);
-
-    //Ground grass
-    ctx.fillStyle = "green";
-    ctx.fillRect(0, 720, 1250, 20);
-
-    //Moving player by xSpeed and ySpeed
-    player.x += player.xSpeed;
-    player.y += player.ySpeed;
-
-    //Player
-    let player1 = document.getElementById("player1");
-    ctx.drawImage(player1, player.x, player.y, player.w, player.h);
-
-    requestAnimationFrame(draw)
-}
-
-//Key Event Stuff
-document.addEventListener("keydown", keydownHandler);
-document.addEventListener("keyup", keyupHandler);
-
-function keydownHandler(){
-        if (event.code == "ArrowRight" || event.code == "KeyD"){
-            player.xSpeed += player.speed_x;
-        } else if (event.code == "ArrowLeft" || event.code == "KeyA"){
-            player.xSpeed += -player.speed_x;
-        }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space"){
-            player.ySpeed += -player.speed_y;
-        }
-    }
-
-
-function keyupHandler(){
-    if (event.code == "ArrowRight" || event.code == "KeyD" && player.xSpeed > 0){
-       player.xSpeed = 0;
-    } else if (event.code == "ArrowLeft" || event.code == "KeyA" && player.xSpeed < 0){
-       player.xSpeed = 0;
-   }  else if (event.code == "ArrowUp" || event.code == "KeyW" || event.code == "Space" && player.ySpeed < 0){
-       player.ySpeed = 0;
-   }
-}
-
