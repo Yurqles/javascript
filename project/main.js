@@ -51,7 +51,7 @@ let background = {
     background21: document.getElementById('background21'),
     background22: document.getElementById('background22'),
     background23: document.getElementById('background23'),
-    background: 3,
+    background: 1,
 }
 
 let player = {
