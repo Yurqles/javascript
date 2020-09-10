@@ -13,7 +13,7 @@ function analyzeNumber() {
 
     // Analyze Number and display results
     document.getElementById('sign').innerHTML = getSign(numInput);
-    //document.getElementById('even-odd').innerHTML = evenOrOdd(numInput);
+    document.getElementById('even-odd').innerHTML = evenOrOdd(numInput);
     //document.getElementById('multiple').innerHTML = multipleOf10(numInput);
 }
 
@@ -31,9 +31,8 @@ function getSign(num){
 }
 
 function evenOrOdd(num) {
-    if (num = 0) {
-        return 'even'; 
-    } else if (num = 0) {
-        return 'odd';
- }
+    if (num % 2 == 0)
+        return 'Even';
+    else
+        return 'Odd';
 }
