@@ -1,4 +1,3 @@
-
 // Number Analyzer
 
 // HTML Elements
@@ -23,21 +22,18 @@ function analyzeNumber() {
 
 function getSign(num){
     if (num > 0 ) {
-        document.getElementById('sign').innerHTML = 'Pos';
-        return num;
+        return 'Pos';
     } else if (num < 0) {
-        document.getElementById('sign').innerHTML = 'Neg';
-        return num;
-    } else if (num = 0) {
-        document.getElementById('sign').innerHTML = 'Zero';
-        return num;
+        return 'Neg';
+    } else if (num == 0) {
+        return 'Zero';
     }
 }
 
-//function evenOrOdd(num) {
-//    if (num = 0) {
-//        document.getElementById('even-odd').innerHTML = 'even';
-  //  } else if (num = 0) {
-    //    document.getElementById('even-odd').innerHTML = 'odd';
-  // }
-//}
+function evenOrOdd(num) {
+    if (num = 0) {
+        return 'even'; 
+    } else if (num = 0) {
+        return 'odd';
+ }
+}
