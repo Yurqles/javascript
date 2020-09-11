@@ -37,14 +37,24 @@ function getSlope(x1, y1, x2, y2) {
 }
 
 function getDescription(x1, y1, x2, y2) {
-    if (x1 > x2) {
+    if (x1 > x2 && y1 > y2) {
+        return 'decreased horizontally and decreased vertically';
+    }  else if (x1 > x2 && y1 < y2) {
+        return 'decreased horizontally and increased vertically';
+    }  else if (x1 < x2 && y1 > y2) {
+        return 'increased horizontally and decreased vetically';
+    } else if (x1 < x2 && y1 > y2) {
+        return 'increased horizontally and increased vetically';
+    } else if (x1 > x2 && y1 == y2) {
         return 'decreased horizontally';
-    } if (y1 > y2) {
-        return 'decreased vertically';
-    } if  (x1 < x2) {
+    } else if (x1 < x2 && y1 == y2) {
         return 'increased horizontally';
-    } if (y1 < y2) {
+    } else if (x1 == x2 && y1 > y2) {
+        return 'decreased vertically';
+    } else if (x1 == x2 && y1 < y2) {
         return 'increased vertically';
+    } else if (x1 == x2 && y1 == y2) {
+        return 'no changement has occured';
     }
 }
 
