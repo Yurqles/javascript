@@ -37,24 +37,18 @@ function getSlope(x1, y1, x2, y2) {
 }
 
 function getDescription(x1, y1, x2, y2) {
-    if (x1 > x2 && y1 > y2) {
-        return 'decreased horizontally and decreased vertically';
-    }  else if (x1 > x2 && y1 < y2) {
-        return 'decreased horizontally and increased vertically';
-    }  else if (x1 < x2 && y1 > y2) {
-        return 'increased horizontally and decreased vetically';
-    } else if (x1 < x2 && y1 < y2) {
-        return 'increased horizontally and increased vetically';
-    } else if (x1 > x2 && y1 == y2) {
-        return 'decreased horizontally';
-    } else if (x1 < x2 && y1 == y2) {
-        return 'increased horizontally';
-    } else if (x1 == x2 && y1 > y2) {
-        return 'decreased vertically';
-    } else if (x1 == x2 && y1 < y2) {
-        return 'increased vertically';
-    } else if (x1 == x2 && y1 == y2) {
-        return 'no changement has occured';
+    //Use slope formula
+    let rise = y2 - y1;
+    let run = x2 - x1;
+    let slope = (rise / run);
+    if (slope == 0) {
+        return 'horizontal';
+    } else if (y2 > y1) {
+        return 'increasing';
+    } else if (y2 < y1) {
+        return 'decreasing';
+    } else if (slope = 'undefined') {
+        return 'vertical';
     }
 }
 
@@ -75,5 +69,3 @@ function getPointLocation(x, y) {
         return 'quadrant 4';
     } 
 }
-
-
