@@ -6,6 +6,7 @@ let nameIndex = 0;
 
 //Name gallery
 let pEl = document.getElementById('p1');
+let breakLine = document.getElementById('hr1');
 
 
 //Event Listeners
@@ -21,7 +22,7 @@ function randomName() {
     nameIndex = Math.randomInt(0, namePaths.length) 
 
     //Display the new nickname
-    pEl.innerHTML += firstName + ' ' + namePaths[nameIndex] + ' ' +  lastName;
+    pEl.innerHTML += firstName + ' ' + namePaths[nameIndex] + ' ' +  lastName+ ' <br/>';
 }
 
 function allNames() {
@@ -31,7 +32,8 @@ function allNames() {
     
     //Add all names
     for (let i = 0; i < namePaths.length; i++) {
-        pEl.innerHTML +=  firstName + ' ' + namePaths[i] + ' ' +  lastName + '';
+        pEl.innerHTML +=  firstName + ' ' + namePaths[i] + ' ' +  lastName + '<br/>';
+        
     }
 }
 
