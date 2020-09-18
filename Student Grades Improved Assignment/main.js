@@ -9,8 +9,7 @@ cnv.height = 600;
 // Global Variables
 let grades = [];
 for (let n = 0; n < 50; n++) {
-    grades.splice
-    grades.push(Math.randomInt(0, max));
+    grades.push(Math.randomInt(0, 100));
 }
 let max = 100; // grade values should be b/t 0 and max
 
@@ -126,6 +125,9 @@ document.addEventListener('keydown', keydownHandler);
 function keydownHandler(event) {
     console.log(event.code) 
     if (event.code ==  'KeyR') {
-        grades.splice(0, 12, 60, 70, 45, 20, 40, 90, 100, 30, 45, 75, 40, 80);
+        for (let n = 0; n < 50; n++) {
+            grades.push(Math.randomInt(0, max));
+        }
+        grades.splice(0, grades.length / 2);
     }
 }
