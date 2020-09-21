@@ -14,24 +14,21 @@ fetch('nicknames.txt').then(convertData).then(processData);
 
 function convertData(rawData) {
     //Get the nicknames from the text file and covert it into an array of characters
-    return rawData.text;
+    return rawData.text();
 }
 
 function processData(data) {
     namePaths = data.split('\r\n');
 }
 
-function allNames (aString) {
+function allNames() {
     //Get the first and last name
     let firstName = document.getElementById('textInput1').value;
     let lastName = document.getElementById("textInput2").value;
 
-    //Get strings
-    let namePaths = aString.split("");
-
     //Add all names
     for (let i = 0; i < namePaths.length; i++) {
-        return firstName + namePaths.join("") + lastName;
+        document.getElementById('p1').innerHTML += firstName + ' ' + namePaths[i] + ' ' + lastName  + '<br>';
     }
 } 
 
@@ -40,12 +37,9 @@ function randomName(aString) {
     let firstName = document.getElementById('textInput1').value;
     let lastName = document.getElementById("textInput2").value;
 
-    //Get strings
-    let namePaths = string.split("");
-
     //Get a random index
     nameIndex = Math.randomInt(0, namePaths.length); 
 
     //Display the new nickname
-    return firstName + namePaths.join("") + lastName;
+    document.getElementById('p1').innerHTML += firstName + ' '  + namePaths[nameIndex] + ' '  + lastName  + '<br>';
 }
