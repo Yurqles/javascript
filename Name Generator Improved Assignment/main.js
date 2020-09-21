@@ -32,7 +32,7 @@ function allNames() {
     }
 } 
 
-function randomName(aString) { 
+function randomName() { 
     //Get the first and last name
     let firstName = document.getElementById('textInput1').value;
     let lastName = document.getElementById("textInput2").value;
